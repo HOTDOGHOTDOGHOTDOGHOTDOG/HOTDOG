@@ -1,4 +1,4 @@
-function goTo(position,a,m2,m3,m4)
+function goTo(position,a,m2,m3,m4) %This function moves the arm to a desired location
 r4 = readVoltage(a, 'A8');
 r3 = readVoltage(a, 'A9');
 r2 = readVoltage(a, 'A11');
@@ -7,7 +7,7 @@ center4 = position(3);
 center3 = position(2);
 center2 = position(1);
 
-dist4 = abs(center4 - r4);
+dist4 = abs(center4 - r4); %Sets the direction the motor must move for desired location
 if (dist4 <= 0.05)
     sign4 = 0;
 elseif (r4 > center4)
@@ -16,7 +16,7 @@ else
     sign4 = -1;
 end
 
-dist3 = abs(center3 - r3);
+dist3 = abs(center3 - r3); %Sets the direction the motor must move for desired location
 if (dist3 <= 0.05)
     sign3 = 0;
 elseif (r3 > center3)
@@ -25,7 +25,7 @@ else
     sign3 = 1;
 end
 
-dist2 = abs(center2 - r2);
+dist2 = abs(center2 - r2); %Sets the direction the motor must move for desired location
 if (dist2 <= 0.05)
     sign2 = 0;
 elseif (r2 > center2)
@@ -45,22 +45,22 @@ stopped4 = 0;
 stopped3 = 0;
 stopped2 = 0;
 
-while (dist4 >= 0.05 ||  dist3 >= 0.05 || dist2 >= 0.05)
+while (dist4 >= 0.05 ||  dist3 >= 0.05 || dist2 >= 0.05) %Main loop to move motors
     r4 = readVoltage(a, 'A8');
     dist4 = abs(center4 - r4);
     r3 = readVoltage(a, 'A9');
     dist3 = abs(center3 - r3);
     r2 = readVoltage(a, 'A11');
     dist2 = abs(center2 - r2);
-    if(dist4 <= 0.05)
+    if(dist4 <= 0.05) %Check if in target location
         stop(m4);
         stopped4 = 1;
     end
-    if(dist3 <= 0.05)
+    if(dist3 <= 0.05) %Check if in target location
         stop(m3);
         stopped3 = 1;
     end
-    if(dist2 <= 0.05)
+    if(dist2 <= 0.05) %Check if in target location
         stop(m2);
         stopped2 = 1;
     end
@@ -72,7 +72,7 @@ while (dist4 >= 0.05 ||  dist3 >= 0.05 || dist2 >= 0.05)
 
 end
 
-stop(m2);
+stop(m2); %Stops all motors
 stop(m3);
 stop(m4);
 end
